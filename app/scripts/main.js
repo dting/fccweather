@@ -4,7 +4,7 @@
   $(document).ready(init);
 
   function init() {
-    $.get('http://freegeoip.net/json/', function(response) {
+    $.get('https://freegeoip.net/json/', function(response) {
       var coordinates = {
         lat: +response.latitude,
         lon: +response.longitude,
@@ -59,7 +59,6 @@
   }
 
   function getUnits(country) {
-    console.log(country);
     var imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'];
     return imperialCountries.indexOf(country) === -1 ? 'metric' : 'imperial';
   }

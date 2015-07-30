@@ -3,6 +3,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
+import vinylPaths from 'vinyl-paths';
 import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
@@ -143,7 +144,7 @@ gulp.task('build', ['html', 'images', 'fonts', 'extras'], () => {
 gulp.task('deploy', ['build'], function () {
   return gulp.src('dist')
     .pipe($.subtree())
-    .pipe($.clean());
+    .pipe(vinylPaths(del));
 });
 
 gulp.task('default', ['clean'], () => {
