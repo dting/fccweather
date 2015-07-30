@@ -1,0 +1,102 @@
+// bower:scss
+// endbower
+@import url(https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,900,400italic);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+* {
+  font-family: RobotoDraft;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #b5d592;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#attribution a {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-weight: 100;
+}
+
+#weatherIcon {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  margin-left: -25px;
+}
+
+#refresh {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  margin-top: -18px;
+  padding: 0;
+  outline: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  height: 82px;
+  line-height: 82px;
+  h1 {
+    margin: 0;
+  }
+}
+
+.main {
+  position: absolute;
+  top: 82px;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  overflow: scroll;
+}
+
+.container {
+  margin: 10px;
+  height: 90px;
+  width: 190px;
+  color: white;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  user-select: none;
+  position: relative;
+  .contents {
+    font-weight: 700;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+  }
+}
