@@ -4,29 +4,31 @@
   var app = angular.module('weatherApp', []);
 
   app.controller('weatherController',
-    function($scope, LocationService, WeatherService) {
-      $scope.location = undefined;
-      $scope.weather = undefined;
+    ['$scope', 'LocationService', 'WeatherService',
+      function($scope, LocationService, WeatherService) {
+        $scope.location = undefined;
+        $scope.weather = undefined;
 
-      LocationService.getCoordinates().then(function(coordinates) {
-        LocationService.getGeocodeInfo(coordinates).then(function(location) {
-          $scope.location = location;
+        LocationService.getCoordinates().then(function(coordinates) {
+          LocationService.getGeocodeInfo(coordinates).then(function(location) {
+            $scope.location = location;
+          });
+          WeatherService.getWeatherInfo(coordinates).success(function(res) {
+            $scope.weather = res.scopeData;
+          });
+        }, function(err) {
+          console.log(err);
         });
-        WeatherService.getWeatherInfo(coordinates).success(function(res) {
-          $scope.weather = res.scopeData;
-        });
-      }, function(err) {
-        console.log(err);
-      });
 
-      $scope.toggleUnits = function() {
-        if ($scope.weather) {
-          WeatherService.toggleUnits($scope.weather.temp);
+        $scope.toggleUnits = function() {
+          if ($scope.weather) {
+            WeatherService.toggleUnits($scope.weather.temp);
+          }
         }
       }
-    });
+    ]);
 
-  app.factory('LocationService', function($q, $http) {
+  app.factory('LocationService', ['$q', '$http', function($q, $http) {
     var geocoder = new google.maps.Geocoder();
     var locationComps = {
       locality: 'long_name',
@@ -89,16 +91,18 @@
       getCoordinates: getCoordinates,
       getGeocodeInfo: getGeocodeInfo
     };
-  });
+  }
+  ]);
 
-  app.factory('WeatherService', function($http) {
+  app.factory('WeatherService', ['$http', function($http) {
     function degToCompass(deg) {
       return DIR[(~~((deg / 22.5) + 0.5) % 16)];
     }
 
     function getUnits(country) {
       var imperialCountries = ['US', 'BS', 'BZ', 'KY', 'PW'];
-      return imperialCountries.indexOf(country) === -1 ? 'metric' : 'imperial';
+      return imperialCountries.indexOf(country) === -1 ? 'metric' :
+             'imperial';
     }
 
     function toggleUnits(temp) {
@@ -249,5 +253,6 @@
       getWeatherInfo: getWeatherInfo,
       toggleUnits: toggleUnits
     };
-  });
+  }
+  ]);
 })();
